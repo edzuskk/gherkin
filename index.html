@@ -5,43 +5,196 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gherkin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-        background-color: #ffffff;
-        color: #000;
+        font-family: 'Inter', sans-serif;
+        background: #0f172a;
+        min-height: 100vh;
+        color: #fff;
+        padding: 2rem;
       }
-      
+
       h1 {
-        color: #333;
-        margin-bottom: 20px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        background: linear-gradient(120deg, #fff, #e0e0e0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
-      
+
+      /* Q&A Container */
+      .qa-container {
+        max-width: 900px;
+        margin: 2rem auto;
+      }
+
+      /* Question Item */
+      .qa-item {
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .qa-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Question (p tag) */
+      .qa-item p {
+        padding: 1.5rem;
+        margin: 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #fff;
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .qa-item p::before {
+        content: '➕';
+        margin-right: 1rem;
+        font-size: 1.3rem;
+        transition: transform 0.3s ease;
+      }
+
+      .qa-item.active p::before {
+        content: '➖';
+        transform: rotate(180deg);
+      }
+
+      .qa-item p:hover {
+        color: #f093fb;
+        text-shadow: 0 0 20px rgba(240, 147, 251, 0.5);
+      }
+
+      /* Answer List (ul tag) */
+      .qa-item ul {
+        list-style: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .qa-item.active ul {
+        max-height: 500px;
+        padding: 1.5rem;
+      }
+
+      /* Answer Items (li tag) */
+      .qa-item li {
+        padding: 0.75rem 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        border-left: 3px solid transparent;
+        padding-left: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .qa-item li::before {
+        content: '✓';
+        position: absolute;
+        left: -1.5rem;
+        color: #f093fb;
+        font-weight: bold;
+      }
+
+      .qa-item li:hover {
+        border-left-color: #f093fb;
+        padding-left: 1.5rem;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(240, 147, 251, 0.3);
+      }
+
+      .qa-item li + li {
+        margin-top: 0.5rem;
+      }
+
+      /* Table Container */
+      .table-container {
+        max-width: 900px;
+        margin: 0 auto 4rem;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+
+      .table-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 1.5rem;
+        background: rgba(240, 147, 251, 0.1);
+        border-bottom: 2px solid rgba(240, 147, 251, 0.3);
+        color: #fff;
+        margin: 0;
+      }
+
+      /* Table styles */
       table {
         border-collapse: collapse;
         width: 100%;
-        max-width: 600px;
-        border: 1px solid #ccc;
+        margin: 0;
       }
       
       th {
-        background-color: #f0f0f0;
-        color: #000;
-        padding: 10px;
+        background: linear-gradient(90deg, rgba(240, 147, 251, 0.2), rgba(100, 200, 255, 0.2));
+        color: #fff;
+        padding: 1rem 1.5rem;
         text-align: left;
-        border: 1px solid #ccc;
-        font-weight: bold;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
       
       td {
-        padding: 10px;
-        border: 1px solid #ccc;
-        color: #000;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.95rem;
       }
       
-      tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
+      tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      tbody tr:hover {
+        background: rgba(240, 147, 251, 0.1);
+        border-left: 3px solid #f093fb;
+        padding-left: 0.5rem;
+      }
+      
+      tbody tr:last-child td {
+        border-bottom: none;
       }
     </style>
   </head>
@@ -49,56 +202,153 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
-    <h1>Gherkin termini</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>English</th>
-          <th>Latvian</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Feature</td>
-          <td>Funkcionalas iezimes</td>
-        </tr>
-        <tr>
-          <td>Scenario</td>
-          <td>Scenārijs</td>
-        </tr>
-        <tr>
-          <td>Given</td>
-          <td>Iedots</td>
-        </tr>
-        <tr>
-          <td>When</td>
-          <td>Kad</td>
-        </tr>
-        <tr>
-          <td>Then</td>
-          <td>Tad</td>
-        </tr>
-        <tr>
-          <td>And</td>
-          <td>Un</td>
-        </tr>
-        <tr>
-          <td>But</td>
-          <td>Bet</td>
-        </tr>
-        <tr>
-          <td>User story</td>
-          <td>Lietotājsstāsts</td>
-        </tr>
-        <tr>  
-          <td>Background</td>
-          <td>Fons</td>
-        </tr>
-        <tr>
-          <td>Examples</td>
-          <td>Piemēri</td>
-        </tr>
-      </tbody>
-    </table>
+    <h1>Gherkin Termini & Q&A</h1>
+    
+    <div class="table-container">
+      <h2 class="table-title">Gherkin Termini</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>English</th>
+            <th>Latvian</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Feature</td>
+            <td>Funkcionalas iezimes</td>
+          </tr>
+          <tr>
+            <td>Scenario</td>
+            <td>Scenārijs</td>
+          </tr>
+          <tr>
+            <td>Given</td>
+            <td>Iedots</td>
+          </tr>
+          <tr>
+            <td>When</td>
+            <td>Kad</td>
+          </tr>
+          <tr>
+            <td>Then</td>
+            <td>Tad</td>
+          </tr>
+          <tr>
+            <td>And</td>
+            <td>Un</td>
+          </tr>
+          <tr>
+            <td>But</td>
+            <td>Bet</td>
+          </tr>
+          <tr>
+            <td>User story</td>
+            <td>Lietotājsstāsts</td>
+          </tr>
+          <tr>
+            <td>Background</td>
+            <td>Fons</td>
+          </tr>
+          <tr>
+            <td>Examples</td>
+            <td>Piemēri</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="qa-container">
+      <!-- Q&A Item 1 -->
+      <div class="qa-item">
+        <p>Kas un kāpēc ir funkcionālā iezīme?</p>
+        <ul>
+          <li>Funkcionālā iezīme (Feature) ir sistēmas funkcionalitāte</li>
+          <li>Tā atbalsta noteiktu spēju (Capability)</li>
+          <li>Apraksta sistēmas uzvedību strukturētā un saprotamā veidā</li>
+          <li>Var lasīt gan cilvēks, gan automatizēti pārbaudīt</li>
+        </ul>
+      </div>
+
+      <!-- Q&A Item 2 -->
+      <div class="qa-item">
+        <p>Kādā formātā veidot lietotājstāstus (User Story)?</p>
+        <ul>
+          <li>As an [Actor] - kāds ir aktors</li>
+          <li>I want [specific system behavior] - kādu uzvedību vēlas</li>
+          <li>So as to achieve [goal] - kāds ir galarezultāts</li>
+          <li>Piemērs: As a customer I want to pay online So that I save time</li>
+        </ul>
+      </div>
+
+      <!-- Q&A Item 3 -->
+      <div class="qa-item">
+        <p>Kā veidot scenārijus Gherkin valodā?</p>
+        <ul>
+          <li><strong>Given</strong> - nosacījumi/konteksts pirms darbības</li>
+          <li><strong>When</strong> - lietotāja darbība</li>
+          <li><strong>Then</strong> - sagaidāmais rezultāts</li>
+          <li><strong>And/But</strong> - papildnoteikumi vai nosacījumi</li>
+          <li>Katram scenārijam ir unikāls nosaukums</li>
+        </ul>
+      </div>
+
+      <!-- Q&A Item 4 -->
+      <div class="qa-item">
+        <p>Cik daudz scenāriju ir vienai funkcionālajai iezīmei?</p>
+        <ul>
+          <li>Nav noteikta minimuma vai maksimuma</li>
+          <li>Katrai iezīmei vismaz viens scenārijs</li>
+          <li>Parasti vairāki scenāriji</li>
+          <li>Apraksta uzvedību dažādos apstākļos</li>
+          <li>Pārklāj pozitīvos un negatīvos gadījumus</li>
+        </ul>
+      </div>
+
+      <!-- Q&A Item 5 -->
+      <div class="qa-item">
+        <p>Kā Rubika kubs ļauj skatīties uz funkcionālajām iezīmēm?</p>
+        <ul>
+          <li>Feature nemainās - tas paliek konstants</li>
+          <li>Mainās skatpunkts - dažādi skati uz iezīmi</li>
+          <li>Katrs pagrieziens = cits scenārijs</li>
+          <li>Citi apstākļi tai pašai funkcionalitātei</li>
+          <li>Viena iezīme, daudz perspektīvu</li>
+        </ul>
+      </div>
+
+      <!-- Q&A Item 6 -->
+      <div class="qa-item">
+        <p>Kas ir veiksmīgā iznākuma scenārijs (Happy Path)?</p>
+        <ul>
+          <li>Scenārijs bez šķēršļiem</li>
+          <li>Galvenais lietotājs bez problēmām</li>
+          <li>Sasniedz Feature mērķi</li>
+          <li>Labākais un vienkāršākais lietošanas gadījums</li>
+          <li>Bieži saukts par "Happy Path Scenario"</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
+
+<script>
+  // Q&A Accordion functionality
+  const qaItems = document.querySelectorAll('.qa-item');
+  
+  qaItems.forEach(item => {
+    const question = item.querySelector('p');
+    
+    question.addEventListener('click', () => {
+      // Close other items
+      qaItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+        }
+      });
+      
+      // Toggle current item
+      item.classList.toggle('active');
+    });
+  });
+</script>
