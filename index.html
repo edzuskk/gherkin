@@ -112,15 +112,6 @@
         border-left: 3px solid transparent;
         padding-left: 1rem;
         transition: all 0.3s ease;
-        position: relative;
-      }
-
-      .qa-item li::before {
-        content: '✓';
-        position: absolute;
-        left: -1.5rem;
-        color: #f093fb;
-        font-weight: bold;
       }
 
       .qa-item li:hover {
@@ -263,10 +254,8 @@
       <div class="qa-item">
         <p>Kas un kāpēc ir funkcionālā iezīme?</p>
         <ul>
-          <li>Funkcionālā iezīme (Feature) ir sistēmas funkcionalitāte</li>
-          <li>Tā atbalsta noteiktu spēju (Capability)</li>
-          <li>Apraksta sistēmas uzvedību strukturētā un saprotamā veidā</li>
-          <li>Var lasīt gan cilvēks, gan automatizēti pārbaudīt</li>
+          <li>Funkcionālā iezīme (Feature) ir sistēmas funkcionalitāte, kas atbalsta noteiktu spēju (Capability).
+          Tā apraksta sistēmas uzvedību strukturētā un saprotamā veidā, lai to varētu gan lasīt, gan automatizēti pārbaudīt.</li>
         </ul>
       </div>
 
@@ -274,10 +263,10 @@
       <div class="qa-item">
         <p>Kādā formātā veidot lietotājstāstus (User Story)?</p>
         <ul>
+          <li>User Story formāts:</li>
           <li>As an [Actor] - kāds ir aktors</li>
           <li>I want [specific system behavior] - kādu uzvedību vēlas</li>
           <li>So as to achieve [goal] - kāds ir galarezultāts</li>
-          <li>Piemērs: As a customer I want to pay online So that I save time</li>
         </ul>
       </div>
 
@@ -285,6 +274,7 @@
       <div class="qa-item">
         <p>Kā veidot scenārijus Gherkin valodā?</p>
         <ul>
+          <li>Scenāriji tiek rakstīti Gherkin valodā, izmantojot struktūru:</li>
           <li><strong>Given</strong> - nosacījumi/konteksts pirms darbības</li>
           <li><strong>When</strong> - lietotāja darbība</li>
           <li><strong>Then</strong> - sagaidāmais rezultāts</li>
@@ -297,11 +287,8 @@
       <div class="qa-item">
         <p>Cik daudz scenāriju ir vienai funkcionālajai iezīmei?</p>
         <ul>
-          <li>Nav noteikta minimuma vai maksimuma</li>
-          <li>Katrai iezīmei vismaz viens scenārijs</li>
-          <li>Parasti vairāki scenāriji</li>
-          <li>Apraksta uzvedību dažādos apstākļos</li>
-          <li>Pārklāj pozitīvos un negatīvos gadījumus</li>
+          <li>Nav noteikta skaita.
+            Katrai iezīmei ir vismaz viens scenārijs, parasti vairāki, kas apraksta uzvedību dažādos apstākļos.</li>
         </ul>
       </div>
 
@@ -309,11 +296,10 @@
       <div class="qa-item">
         <p>Kā Rubika kubs ļauj skatīties uz funkcionālajām iezīmēm?</p>
         <ul>
-          <li>Feature nemainās - tas paliek konstants</li>
-          <li>Mainās skatpunkts - dažādi skati uz iezīmi</li>
-          <li>Katrs pagrieziens = cits scenārijs</li>
-          <li>Citi apstākļi tai pašai funkcionalitātei</li>
-          <li>Viena iezīme, daudz perspektīvu</li>
+          <li>Rubika kubs simbolizē Feature:</li>
+          <li>Feature nemainās</li>
+          <li>Mainās skatpunkts</li>
+          <li>Katrs pagrieziens = cits scenārijs (citi apstākļi tai pašai funkcionalitātei).</li>
         </ul>
       </div>
 
@@ -321,11 +307,8 @@
       <div class="qa-item">
         <p>Kas ir veiksmīgā iznākuma scenārijs (Happy Path)?</p>
         <ul>
-          <li>Scenārijs bez šķēršļiem</li>
-          <li>Galvenais lietotājs bez problēmām</li>
-          <li>Sasniedz Feature mērķi</li>
-          <li>Labākais un vienkāršākais lietošanas gadījums</li>
-          <li>Bieži saukts par "Happy Path Scenario"</li>
+          <li>Happy Path ir scenārijs, kurā galvenais lietotājs bez šķēršļiem sasniedz Feature mērķi.
+              Tas ir labākais un vienkāršākais lietošanas gadījums.</li>
         </ul>
       </div>
     </div>
